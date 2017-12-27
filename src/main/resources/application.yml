@@ -1,0 +1,117 @@
+server:
+    #程序启动端口
+    port: 8050
+    tomcat:
+        uri-encoding: UTF-8
+    
+security:
+    ignored: /resources/**, /webjars/**
+    
+# 指定注册中心的地址
+eureka:
+    instance:
+        #为true时，客户端在注册时就会使用自己的ip地址而不是主机名
+        preferIpAddress: true
+    client:
+        serviceUrl:
+            defaultZone: http://gimp-discovery:8047/eureka/
+
+#log4j2路径配置        
+logging:
+    config: classpath:log4j2.xml
+
+spring:
+    application:
+        name: gimp-api-gateway
+    jackson:
+        serialization:
+            indent_output: true
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        database: 0
+        password: 
+        # 连接超时时间（毫秒）
+        timeout: 0
+        pool:
+            # 连接池最大连接数（使用负值表示没有限制）
+            max-active: 10
+            # 连接池中的最大空闲连接
+            max-idle: 8
+            # 连接池中的最小空闲连接
+            min-idle: 0
+            # 连接池最大阻塞等待时间（使用负值表示没有限制）
+            max-wait: -1
+    thymeleaf:
+        cache: false
+    http:
+        encoding:
+            charset: UTF-8
+            force: true
+            enabled: true
+        multipart:
+            max-file-size: 50MB
+            max-request-size: 100MB
+
+##timeout config
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 60000
+
+###################################################################
+### 配置zuul路由
+###################################################################
+zuul:
+    host:
+        connect-timeout-millis: 60000
+        socket-timeout-millis: 60000
+    ignored-services: gimp-auth-server, gimp-module-sys, gimp-module-cms
+    #prefix: /api
+    #当stripPrefix=true的时候 （http://127.0.0.1:8181/api/user/list -> http://192.168.1.100:8080/user/list）  
+    #当stripPrefix=false的时候（http://127.0.0.1:8181/api/user/list -> http://192.168.1.100:8080/api/user/list）
+    #stripPrefix: false
+    routes:
+        auth-server:
+            path: /authServer/**
+            serviceId: gimp-auth-server
+            sensitiveHeaders: 
+            strip-prefix: false
+        module-sys:
+            path: /api/system/**
+            serviceId: gimp-module-sys
+            sensitiveHeaders: 
+            strip-prefix: false
+        module-workflow:
+            path: /api/workflow/**
+            serviceId: gimp-module-workflow
+            sensitiveHeaders: 
+            strip-prefix: false
+        resource-server:
+            path: /res/**
+            serviceId: gimp-resource-server
+            sensitiveHeaders: 
+            strip-prefix: false
+        cdms:
+            path: /api/cdms/**
+            serviceId: cdms
+            sensitiveHeaders: 
+            strip-prefix: false
+        weijiju:
+            path: /api/weijiju/**
+            serviceId: weijiju
+            sensitiveHeaders: 
+            strip-prefix: false
+        hssm:
+            path: /api/hssm/**
+            serviceId: hssm
+            sensitiveHeaders: 
+            strip-prefix: false
+
+
+ribbon:
+    ReadTimeout: 30000
+    ConnectTimeout: 30000 
