@@ -9,23 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * 配置验证过滤
  * @author zzd
- *
  */
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-    	httpSecurity.anonymous().disable()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .csrf().disable();
+        httpSecurity.anonymous().disable().authorizeRequests().anyRequest().authenticated().and().csrf().disable();
     }
-    
+
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/hystrix.stream/**", "/res/**", "/error","/authServer/**", "/api/**", "/zuul/res/**");
+        web.ignoring().antMatchers("/hystrix.stream/**", "/res/**", "/error", "/authServer/**", "/api/**", "/zuul/res/**");
     }
 }

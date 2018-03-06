@@ -9,16 +9,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 /**
  * 支持oauth2的网关
  * @author zzd
- *
  */
 @SpringBootApplication
 @EnableZuulProxy
 @EnableOAuth2Client
 public class ApiGatewayApplication {
 
-	public static void main(String[] args) {
-    	SpringApplication app = new SpringApplication(ApiGatewayApplication.class);
-    	app.setBannerMode(Banner.Mode.OFF);
-    	app.run(args); 
-	}
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(ApiGatewayApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
+    }
 }
