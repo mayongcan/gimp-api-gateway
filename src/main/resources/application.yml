@@ -95,19 +95,29 @@ zuul:
             serviceId: gimp-resource-server
             sensitiveHeaders: 
             strip-prefix: false
+        module-extend:
+            path: /api/extend/**
+            serviceId: gimp-module-extend
+            sensitiveHeaders: 
+            strip-prefix: false
         cdms:
             path: /api/cdms/**
             serviceId: cdms
             sensitiveHeaders: 
             strip-prefix: false
-        weijiju:
-            path: /api/weijiju/**
-            serviceId: weijiju
-            sensitiveHeaders: 
-            strip-prefix: false
         hssm:
             path: /api/hssm/**
             serviceId: hssm
+            sensitiveHeaders: 
+            strip-prefix: false
+        rales:
+            path: /api/rales/**
+            serviceId: rales
+            sensitiveHeaders: 
+            strip-prefix: false
+        rales-inf:
+            path: /api/rales-inf/**
+            serviceId: rales-inf
             sensitiveHeaders: 
             strip-prefix: false
 
