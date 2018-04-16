@@ -120,6 +120,11 @@ zuul:
             serviceId: rales-inf
             sensitiveHeaders: 
             strip-prefix: false
+        scms:
+            path: /api/scms/**
+            serviceId: scms
+            sensitiveHeaders: 
+            strip-prefix: false
 
 
 ribbon:
