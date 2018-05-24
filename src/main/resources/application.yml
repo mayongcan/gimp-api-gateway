@@ -125,6 +125,11 @@ zuul:
             serviceId: scms
             sensitiveHeaders: 
             strip-prefix: false
+        itp:
+            path: /api/itp/**
+            serviceId: itp
+            sensitiveHeaders: 
+            strip-prefix: false
 
 
 ribbon:
