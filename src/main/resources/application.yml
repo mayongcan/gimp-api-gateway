@@ -110,6 +110,11 @@ zuul:
             serviceId: hssm
             sensitiveHeaders: 
             strip-prefix: false
+        adpf:
+            path: /api/adpf/**
+            serviceId: adpf
+            sensitiveHeaders: 
+            strip-prefix: false    
         rales:
             path: /api/rales/**
             serviceId: rales
